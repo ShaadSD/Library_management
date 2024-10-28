@@ -9,16 +9,14 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+from pathlib import Path
 import environ
 import os
-
+import dj_database_url
 env = environ.Env()
-from pathlib import Path
-BASE_DIR = Path(__file__).resolve().parent.parent
-environ.Env.read_env(os.path.join(BASE_DIR, 'somepath/.env'))
 environ.Env.read_env()
-SECRET_KEY = os.environ.get('somekeyInsidenvFile',env('somekeyInsidenvFile'))
-
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = env("SECRET_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
