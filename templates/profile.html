@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container py-3">
+    {% for borrowed_book in borrowed_books %}
+      <div class="card mb-4">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ borrowed_book.book.photo.url }}" class="img-fluid rounded-start" alt="{{ borrowed_book.book.title }}" />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ borrowed_book.book.Title }}</h5>
+              <p class="card-text">
+                <strong>Description:</strong> {{ borrowed_book.book.Description }}
+              </p>
+              <p class="card-text">
+                <strong>Borrow Price:</strong> TK {{ borrowed_book.book.Borrowing_Price }}
+              </p>
+              {% comment %} <p class="card-text">
+                <strong>Borrowed Quantity:</strong> {{ borrowed_book.quantity }}
+              </p> {% endcomment %}
+              <p>
+                <strong>Borrow Date:</strong> {{ borrowed_book.borrow_date|date:'Y-m-d H:i' }}
+              </p>
+              <form method="post" action="{% url 'return_book' borrowed_book.book.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary bg-black text-white">Return Book</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center text-white">No borrowed books to display.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

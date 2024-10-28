@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="mt-4">
+    {% for bok in book %}
+    <input type="radio" class="btn-check" name="category" id="{{ bok.id }}" autocomplete="off" {% if forloop.first %}checked{% endif %}>
+    <label class="btn btn-primary" for="{{ bok.id }}">
+        <a href="{% url 'Categorywise' bok.category|slugify %}" class="text-decoration-none text-white">{{ bok.category }}</a>
+    </label>
+{% endfor %}
+</div>
+
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for i in book %}
+        <div class="col">
+            <div class="card shadow-sm border-0 rounded" style="max-width: 400px; margin: auto;">
+                <img class="img-fluid rounded-start" style="height: 200px;" src="{{ i.photo.url }}" alt="{{ i.Title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.Title }}</h5>
+                    <p class="card-text"><strong>Description:</strong> {{ i.Description }}</p>
+                    <p class="card-text"><strong>Borrow Price:</strong> TK{{ i.Borrowing_Price }}</p>
+                    <a href="{% url 'book_detail' i.id %}" class="btn btn-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
