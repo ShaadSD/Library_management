@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+CSRF_TRUSTED_ORIGINS = ['https://https://library-management-25p5.onrender.com','https://*.127.0.0.1']
 ALLOWED_HOSTS = ["*"]
 
 
